@@ -20,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 
 // In Program.cs or Startup.cs
 builder.Services.AddScoped<IStockRepository, StockRepository>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
