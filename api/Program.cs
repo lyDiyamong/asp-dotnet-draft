@@ -1,5 +1,7 @@
 // Create a builder for the web application using command-line arguments.
 using api.Data;
+using api.Interfaces;
+using api.Repositories;
 using api.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +15,11 @@ builder.Services.AddControllers(options =>
 });
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
 
+// In Program.cs or Startup.cs
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -28,4 +33,3 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
-
